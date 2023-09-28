@@ -3,6 +3,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 
 public class RockPaperScissorsFrame extends JFrame {
+    JPanel topPnl;
+    JPanel titlePnl;
     JPanel actionPnl;
     JPanel statsPnl;
     JPanel resultsPnl;
@@ -11,12 +13,13 @@ public class RockPaperScissorsFrame extends JFrame {
     JButton paperBtn;
     JButton scissorsBtn;
     JButton quitBtn;
+    JLabel titleLbl;
     JLabel playerWinLbl;
     JLabel compWinLbl;
     JLabel tieLbl;
-    JTextField playerWinTxt;
-    JTextField compWinTxt;
-    JTextField tieTxt;
+    JTextField playerWinTf;
+    JTextField compWinTf;
+    JTextField tieTf;
     int playerWins = 0;
     int compWins = 0;
     int ties = 0;
@@ -40,11 +43,11 @@ public class RockPaperScissorsFrame extends JFrame {
 
     private void createActionPanel() {
         actionPnl = new JPanel();
+        actionPnl.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
         rockBtn = new JButton(new ImageIcon("src/rock.png"));
         paperBtn = new JButton(new ImageIcon("src/paper.png"));
         scissorsBtn = new JButton(new ImageIcon("src/scissors.png"));
         quitBtn = new JButton(new ImageIcon("src/quit.png"));
-
         rockBtn.addActionListener((ActionEvent ae) -> PlayGame(0));
         paperBtn.addActionListener((ActionEvent ae) -> PlayGame(1));
         scissorsBtn.addActionListener((ActionEvent ae) -> PlayGame(2));
@@ -60,24 +63,33 @@ public class RockPaperScissorsFrame extends JFrame {
     private void createStatsPanel() {
         statsPnl = new JPanel();
         playerWinLbl = new JLabel("Player Wins");
+        playerWinLbl.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 16));
         compWinLbl = new JLabel("Computer Wins");
+        compWinLbl.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 16));
         tieLbl = new JLabel("Ties");
-        playerWinTxt = new JTextField("0");
-        compWinTxt = new JTextField("0");
-        tieTxt = new JTextField("0");
+        tieLbl.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 16));
+        playerWinTf = new JTextField("0", 4);
+        playerWinTf.setEditable(false);
+        playerWinTf.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 16));
+        compWinTf = new JTextField("0", 4);
+        compWinTf.setEditable(false);
+        compWinTf.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 16));
+        tieTf = new JTextField("0", 4);
+        tieTf.setEditable(false);
+        tieTf.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 16));
 
         statsPnl.add(playerWinLbl);
-        statsPnl.add(playerWinTxt);
+        statsPnl.add(playerWinTf);
         statsPnl.add(compWinLbl);
-        statsPnl.add(compWinTxt);
+        statsPnl.add(compWinTf);
         statsPnl.add(tieLbl);
-        statsPnl.add(tieTxt);
+        statsPnl.add(tieTf);
         add(statsPnl, BorderLayout.CENTER);
     }
 
     private void createResultsPanel() {
         resultsPnl = new JPanel();
-        resultsArea = new JTextArea(14, 48);
+        resultsArea = new JTextArea(28, 40);
         resultsScroll = new JScrollPane(resultsArea);
 
         resultsPnl.add(resultsScroll);
@@ -158,8 +170,8 @@ public class RockPaperScissorsFrame extends JFrame {
     }
 
     private void UpdateStats() {
-        playerWinTxt.setText(Integer.toString(playerWins));
-        compWinTxt.setText(Integer.toString(compWins));
-        tieTxt.setText(Integer.toString(ties));
+        playerWinTf.setText(Integer.toString(playerWins));
+        compWinTf.setText(Integer.toString(compWins));
+        tieTf.setText(Integer.toString(ties));
     }
 }
